@@ -2,7 +2,6 @@ package com.registraire.main.models.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -59,7 +58,7 @@ public class Etablissement {
     private String lign4Adr;
 
     @Column(name = "COD_ACT_ECON")
-    private String codActEcon;
+    private int codActEcon;
 
     @Column(name = "DESC_ACT_ECON_ETAB")
     private String descActEconEtab;
@@ -68,7 +67,7 @@ public class Etablissement {
     private int noActEconEtab;
 
     @Column(name = "COD_ACT_ECON2")
-    private String codActEcon2;
+    private int codActEcon2;
 
     @Column(name = "DESC_ACT_ECON_ETAB2")
     private String descActEconEtab2;

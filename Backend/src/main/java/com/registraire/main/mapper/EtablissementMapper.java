@@ -17,7 +17,7 @@ public interface EtablissementMapper {
 
     @Mapping(target = "id", expression = "java(etab.getId().toString())")
     @Mapping(target = "entreprise",source = "entreprise", qualifiedByName = "entrepriseEtab")
-    EtablissementRecord mapToEtablissement(Etablissement etab);
+    EtablissementRecord mapToEtablissementRecord(Etablissement etab);
 
     @Named("entrepriseEtab")
     default EntrepriseRecord mapEntrepriseForEtab(Entreprise entreprise) {

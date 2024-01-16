@@ -1,29 +1,25 @@
 package com.registraire.main.businesslogic;
 
-import com.registraire.main.mapper.ContinuationTransformationMapper;
 import com.registraire.main.mapper.DomaineValeurMapper;
 import com.registraire.main.mapper.EntrepriseMapper;
 import com.registraire.main.mapper.EtablissementMapper;
-import com.registraire.main.mapper.FusionScissionMapper;
-import com.registraire.main.mapper.NomMapper;
 import com.registraire.main.models.dto.DomaineValeurRecord;
 import com.registraire.main.models.dto.EntrepriseRecord;
 import com.registraire.main.models.dto.EtablissementRecord;
 import com.registraire.main.models.entities.DomaineValeur;
 import com.registraire.main.models.entities.Entreprise;
 import com.registraire.main.models.entities.Etablissement;
-import com.registraire.main.repository.ContinuationTransformationRepo;
 import com.registraire.main.repository.DomaineValeurRepo;
 import com.registraire.main.repository.EntrepriseRepo;
 import com.registraire.main.repository.EtablissementRepo;
-import com.registraire.main.repository.FusionScissionRepo;
-import com.registraire.main.repository.NomRepo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class RegistraireBusinessLogic {
 
@@ -33,11 +29,11 @@ public class RegistraireBusinessLogic {
 
     private final EtablissementRepo etablissementRepo;
 
-    private final DomaineValeurMapper domaineValeurMapper = DomaineValeurMapper.INSTANCE;
+    private static final DomaineValeurMapper domaineValeurMapper = DomaineValeurMapper.INSTANCE;
 
-    private final EntrepriseMapper entrepriseMapper = EntrepriseMapper.INSTANCE;
+    private static final EntrepriseMapper entrepriseMapper = EntrepriseMapper.INSTANCE;
 
-    private EtablissementMapper etablissementMapper = EtablissementMapper.INSTANCE;
+    private static final EtablissementMapper etablissementMapper = EtablissementMapper.INSTANCE;
 
 
     public EntrepriseRecord retrieveEntreprise(String neq) {
@@ -54,5 +50,19 @@ public class RegistraireBusinessLogic {
     public List<String> retrieveAllEtabNames() {
         List<String> defaultNames = etablissementRepo.retrieveEtabNames();
         return defaultNames.stream().distinct().toList();
+    }
+
+    public List<EtablissementRecord> retrieveSelectedEtab(String nom, Integer code) {
+        if(code == -1){
+            List<Etablissement> etabs = etablissementRepo.findByNomEtab(nom);
+            return etabs.stream().map(etablissementMapper::mapToEtablissementRecord).toList();
+        }else if(nom.isBlank()){
+            List<Etablissement> etabs = etablissementRepo.findByCodActEconOrCodActEcon2(code, code);
+            return etabs.stream().map(etablissementMapper::mapToEtablissementRecord).toList();
+        }else{
+            List<Etablissement> etabs =
+                    etablissementRepo.findByNamesAndCodes(nom, code);
+            return etabs.stream().map(etablissementMapper::mapToEtablissementRecord).toList();
+        }
     }
 }
