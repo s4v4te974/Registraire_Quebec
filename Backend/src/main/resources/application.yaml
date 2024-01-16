@@ -1,0 +1,14 @@
+spring:
+  sql:
+    init:
+      platform: postgres
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    show-sql: true
+    ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://localhost:5432/registraire
+    username: postgres
+    password: postgres
