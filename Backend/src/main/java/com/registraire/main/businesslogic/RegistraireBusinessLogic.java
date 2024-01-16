@@ -52,7 +52,7 @@ public class RegistraireBusinessLogic {
     }
 
     public List<EtablissementRecord> retrieveAllEtab() {
-        List<Etablissement> names = etablissementRepo.findAllEtabs();
+        List<Etablissement> names = etablissementRepo.findAll();
         return names.stream().map(etablissementMapper::mapToEtablissement).toList();
     }
 }
