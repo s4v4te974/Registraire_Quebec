@@ -10,7 +10,8 @@ def map_entreprise(df_entreprise):
     df_entreprise['neq'] = df_entreprise['neq'].fillna(default_value_str)
     df_entreprise['ind_fail'] = df_entreprise['ind_fail'].fillna(default_value_char)
     df_entreprise['dat_immat'] = pd.to_datetime(df_entreprise['dat_immat'], errors='coerce').fillna(default_date)
-    df_entreprise['cod_regim_juri'] = df_entreprise['cod_regim_juri'].fillna(default_value_str)
+    df_entreprise['cod_regim_juri'] = (pd.to_numeric(df_entreprise['cod_regim_juri'], errors='coerce')
+                                       .fillna(default_value_numeric))
     df_entreprise['cod_intval_emplo_que'] = df_entreprise['cod_intval_emplo_que'].fillna(default_value_str)
     df_entreprise['dat_cess_prevu'] = pd.to_datetime(df_entreprise['dat_cess_prevu'], errors='coerce').fillna(
         default_date)
@@ -18,7 +19,8 @@ def map_entreprise(df_entreprise):
     df_entreprise['cod_forme_juri'] = df_entreprise['cod_forme_juri'].fillna(default_value_str)
     df_entreprise['dat_stat_immat'] = pd.to_datetime(df_entreprise['dat_stat_immat'], errors='coerce').fillna(
         default_date)
-    df_entreprise['cod_regim_juri_consti'] = df_entreprise['cod_regim_juri_consti'].fillna(default_value_str)
+    df_entreprise['cod_regim_juri_consti'] = (pd.to_numeric(df_entreprise['cod_regim_juri_consti'])
+                                              .fillna(default_value_numeric))
     df_entreprise['dat_depo_declr'] = pd.to_datetime(df_entreprise['dat_depo_declr'], errors='coerce').fillna(
         default_date)
     df_entreprise['an_decl'] = pd.to_numeric(df_entreprise['an_decl'], errors='coerce').fillna(default_value_numeric)
@@ -31,17 +33,19 @@ def map_entreprise(df_entreprise):
         default_date)
     df_entreprise['dat_maj_index_nom'] = pd.to_datetime(df_entreprise['dat_maj_index_nom'], errors='coerce').fillna(
         default_date)
-    df_entreprise['cod_act_econ_cae'] = df_entreprise['cod_act_econ_cae'].fillna(default_value_str)
+    df_entreprise['cod_act_econ_cae'] = (pd.to_numeric(df_entreprise['cod_act_econ_cae'], errors='coerce')
+                                         .fillna(default_value_numeric))
     df_entreprise['no_act_econ_assuj'] = pd.to_numeric(df_entreprise['no_act_econ_assuj'], errors='coerce').fillna(
         default_value_numeric)
     df_entreprise['desc_act_econ_assuj'] = df_entreprise['desc_act_econ_assuj'].fillna(default_value_str)
-    df_entreprise['cod_act_econ_cae2'] = df_entreprise['cod_act_econ_cae2'].fillna(default_value_str)
+    df_entreprise['cod_act_econ_cae2'] = (pd.to_numeric(df_entreprise['cod_act_econ_cae2'], errors='coerce')
+                                          .fillna(default_value_numeric))
     df_entreprise['no_act_econ_assuj2'] = pd.to_numeric(df_entreprise['no_act_econ_assuj2'], errors='coerce').fillna(
         default_value_numeric)
     df_entreprise['desc_act_econ_assuj2'] = df_entreprise['desc_act_econ_assuj2'].fillna(default_value_str)
     df_entreprise['nom_loclt_consti'] = df_entreprise['nom_loclt_consti'].fillna(default_value_str)
     df_entreprise['dat_consti'] = pd.to_datetime(df_entreprise['dat_consti'], errors='coerce').fillna(default_date)
-    df_entreprise['ind_conven_unmn_actnr'] = df_entreprise['ind_conven_unmn_actnr'].fillna(default_value_char)
+    df_entreprise["ind_conven_unmn_actnr"] = df_entreprise['ind_conven_unmn_actnr'].fillna(default_value_char)
     df_entreprise['ind_ret_tout_pouvr'] = df_entreprise['ind_ret_tout_pouvr'].fillna(default_value_char)
     df_entreprise['ind_limit_resp'] = df_entreprise['ind_limit_resp'].fillna(default_value_char)
     df_entreprise['dat_deb_resp'] = pd.to_datetime(df_entreprise['dat_deb_resp'], errors='coerce').fillna(default_date)
@@ -68,11 +72,13 @@ def map_etablissement(df_etablissement):
     df_etablissement['lign2_adr'] = df_etablissement['lign2_adr'].fillna(default_value_str)
     df_etablissement['lign3_adr'] = df_etablissement['lign3_adr'].fillna(default_value_str)
     df_etablissement['lign4_adr'] = df_etablissement['lign4_adr'].fillna(default_value_str)
-    df_etablissement['cod_act_econ'] = df_etablissement['cod_act_econ'].fillna(default_value_str)
+    df_etablissement['cod_act_econ'] = (pd.to_numeric(df_etablissement['cod_act_econ'], errors='coerce')
+                                        .fillna(default_value_numeric))
     df_etablissement['desc_act_econ_etab'] = df_etablissement['desc_act_econ_etab'].fillna(default_value_str)
     df_etablissement['no_act_econ_etab'] = pd.to_numeric(df_etablissement['no_act_econ_etab'], errors='coerce').fillna(
         default_value_numeric)
-    df_etablissement['cod_act_econ2'] = df_etablissement['cod_act_econ2'].fillna(default_value_str)
+    df_etablissement['cod_act_econ2'] = (pd.to_numeric(df_etablissement['cod_act_econ2'], errors='coerce')
+                                         .fillna(default_value_numeric))
     df_etablissement['desc_act_econ_etab2'] = df_etablissement['desc_act_econ_etab2'].fillna(default_value_str)
     df_etablissement['no_act_econ_etab2'] = pd.to_numeric(df_etablissement['no_act_econ_etab2'],
                                                           errors='coerce').fillna(default_value_numeric)
@@ -83,7 +89,8 @@ def map_etablissement(df_etablissement):
 def map_conti_transfo(df_conti_transfo):
     df_conti_transfo['neq'] = df_conti_transfo['neq'].fillna(default_value_str)
     df_conti_transfo['cod_typ_chang'] = df_conti_transfo['cod_typ_chang'].fillna(default_value_str)
-    df_conti_transfo['cod_regim_juri'] = df_conti_transfo['cod_regim_juri'].fillna(default_value_str)
+    df_conti_transfo['cod_regim_juri'] = (pd.to_numeric(df_conti_transfo['cod_regim_juri'], errors='coerce')
+                                          .fillna(default_value_numeric))
     df_conti_transfo['autr_regim_juri'] = df_conti_transfo['autr_regim_juri'].fillna(default_value_str)
     df_conti_transfo['nom_loclt'] = df_conti_transfo['nom_loclt'].fillna(default_value_str)
     df_conti_transfo['dat_efctvt'] = df_conti_transfo['dat_efctvt'].fillna(pd.to_datetime(default_date))
@@ -116,6 +123,6 @@ def map_nom(df_nom):
 
 
 def map_domaine_valeur(df_domaine):
-    df_domaine['cod_dom_val'] = pd.to_numeric(df_domaine['cod_dom_val'], errors='coerce').fillna(default_value_str)
+    df_domaine['cod_dom_val'] = pd.to_numeric(df_domaine['cod_dom_val'], errors='coerce').fillna(default_value_numeric)
     df_domaine['val_dom_fran'] = df_domaine['val_dom_fran'].fillna(default_value_str)
     return df_domaine

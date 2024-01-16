@@ -28,7 +28,7 @@ def main():
         df_service.rename_dfs(list_df_rename)
         print("column rename with success")
 
-        dao.insert_entreprise(df_entreprise)
+        dao.insert_entreprise (df_entreprise)
         dao.insert_etablissement(df_etablissements)
         dao.insert_conti_transfo(df_conti_transfo)
         dao.insert_nom(df_nom)
