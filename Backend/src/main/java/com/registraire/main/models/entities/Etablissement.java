@@ -79,7 +79,7 @@ public class Etablissement {
     @Column(name = "NOM_ETAB")
     private String nomEtab;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "NEQ", referencedColumnName = "NEQ", insertable = false, updatable = false)
     private Entreprise entreprise;
 }

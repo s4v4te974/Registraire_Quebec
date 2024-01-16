@@ -1,0 +1,30 @@
+.filter-code {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    width: 100vh;
+    margin: auto;
+    height: 10vh;
+    margin-top: 5vh;
+}
+
+.label-search {
+    color: white;
+    padding-right: 5vh;
+    padding-left: 1vh;
+}
+
+#casse {
+    color: white;
+    margin-left: 5vh;
+}
+
+#input-field {
+    width: 300%;
+}
+
+.search{
+    margin-left: -40vh;
+    margin-right: 100vh;
+}

@@ -50,7 +50,7 @@ public class Nom {
     @Column(name = "DAT_FIN_NOM_ASSUJ")
     private LocalDate datFinNomAssuj;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "NEQ", referencedColumnName = "NEQ", insertable = false, updatable = false)
     private Entreprise entreprise;
 }

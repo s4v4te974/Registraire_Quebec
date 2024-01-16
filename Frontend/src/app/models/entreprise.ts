@@ -1,0 +1,48 @@
+import { ContiTransfo } from "./conti-transfo";
+import { Etablissement } from "./etablissement";
+import { Fusci } from "./fusci";
+import { Nom } from "./nom";
+
+export interface Entreprise {
+    neq?: string | null | undefined;
+    indFail?: string | null | undefined;
+    datImmat?: Date | null | undefined;
+    codRegimJuri?: string | null | undefined;
+    codIntvalEmploQue?: string | null | undefined;
+    datCessPrevu?: Date | null | undefined;
+    codStatImmat?: string | null | undefined;
+    codFormeJuri?: string | null | undefined;
+    datStatImmat?: Date | null | undefined;
+    codRegimJuriConsti?: string | null | undefined;
+    datDepoDeclr?: Date | null | undefined;
+    anDecl?: number | null | undefined;
+    anProd?: number | null | undefined;
+    datLimitProd?: Date | null | undefined;
+    anProdPre?: number | null | undefined;
+    datLimitProdPre?: Date | null | undefined;
+    datMajIndexNom?: Date | null | undefined;
+    codActEconCae?: string | null | undefined;
+    noActEconAssuj?: number | null | undefined;
+    descActEconAssuj?: string | null | undefined;
+    codActEconCae2?: string | null | undefined;
+    noActEconAssuj2?: number | null | undefined;
+    descActEconAssuj2?: string | null | undefined;
+    nomLoctConsti?: string | null | undefined;
+    datConsti?: Date | null | undefined;
+    indConvenUnmnActnr?: string | null | undefined;
+    indRetToutPouvr?: string | null | undefined;
+    indLimitResp?: string | null | undefined;
+    datDebResp?: Date | null | undefined;
+    datFinResp?: Date | null | undefined;
+    objetSoc?: string | null | undefined;
+    noMtrVolont?: string | null | undefined;
+    adrDomclAdrDisp?: string | null | undefined;
+    adrDomclLign1Adr?: string | null | undefined;
+    adrDomclLign2Adr?: string | null | undefined;
+    adrDomclLign3Adr?: string | null | undefined;
+    adrDomclLign4Adr?: string | null | undefined;
+    etablissements?: Etablissement[] | null | undefined;
+    contiTransfo?: ContiTransfo[] | null | undefined;
+    fusionScissions?: Fusci[] | null | undefined;
+    noms?: Nom[] | null | undefined;
+}

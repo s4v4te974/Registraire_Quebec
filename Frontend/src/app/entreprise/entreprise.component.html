@@ -1,0 +1,62 @@
+<div class="search-field col-sm-4 col-md-8 col-lg-12">
+    <label id="label-neq">please search for a NEQ </label>
+    <input id="input-neq" [(ngModel)]="neq" />
+    <button type="button" class="btn btn-primary" (click)="getEntreprise(neq)"> Search for entreprise by NEQ</button>
+</div>
+
+<div class="entreprise-panel panel-general">
+    <mat-accordion>
+        <mat-expansion-panel class="col-sm-2 col-md-4 col-lg-4">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Entreprise : {{entreprise?.neq}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Type d'entreprise : <span class="entreprise-panel-attribute">{{entreprise?.descActEconAssuj}}</span></p>
+            <p>Adresse : <span class="entreprise-panel-attribute">{{entreprise?.adrDomclLign1Adr}}</span></p>
+            <p>Localité : <span class="entreprise-panel-attribute">{{entreprise?.adrDomclLign2Adr}}</span></p>
+            <p>Code postal : <span class="entreprise-panel-attribute">{{entreprise?.adrDomclLign4Adr}}</span></p>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div class="etablissements-panel panel-general">
+    <mat-accordion>
+        <mat-expansion-panel class="col-md-7 col-lg-8">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    etablissement associés
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <table mat-table [dataSource]="dataSourceEtab">
+                <ng-container matColumnDef="Nom Etablissement">
+                    <th mat-header-cell *matHeaderCellDef>Nom Etablissement</th>
+                    <td mat-cell *matCellDef="let element">{{element.nomEtab}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Activité économique primaire">
+                    <th mat-header-cell *matHeaderCellDef>Activité économique primaire</th>
+                    <td mat-cell *matCellDef="let element">{{element.descActEconEtab}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Activité économique secondaire">
+                    <th mat-header-cell *matHeaderCellDef>Activité économique secondaire</th>
+                    <td mat-cell *matCellDef="let element">{{element.descActEconEtab2}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Adresse">
+                    <th mat-header-cell *matHeaderCellDef>Adresse</th>
+                    <td mat-cell *matCellDef="let element">{{element.lign1Adr}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Localité">
+                    <th mat-header-cell *matHeaderCellDef>Localité</th>
+                    <td mat-cell *matCellDef="let element">{{element.lign2Adr}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Code postal">
+                    <th mat-header-cell *matHeaderCellDef>Code postal</th>
+                    <td mat-cell *matCellDef="let element">{{element.lign4Adr}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsEtab"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsEtab;"></tr>
+            </table>
+            <mat-paginator  showFirstLastButtons [pageSizeOptions]="[5, 10, 20]" [length]="etabLength">
+            </mat-paginator>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

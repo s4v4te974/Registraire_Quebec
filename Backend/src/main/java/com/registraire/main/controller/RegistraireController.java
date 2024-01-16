@@ -46,9 +46,9 @@ public class RegistraireController {
         }
     }
 
-    @GetMapping(value = "etabs/")
-    public ResponseEntity<List<EtablissementRecord>> retrieveNames() {
-        List<EtablissementRecord> etabs = businessLogic.retrieveAllEtab();
+    @GetMapping(value = "etabs-names/")
+    public ResponseEntity<List<String>> retrieveNames() {
+        List<String> etabs = businessLogic.retrieveAllEtabNames();
         if (etabs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

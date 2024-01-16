@@ -51,8 +51,8 @@ public class RegistraireBusinessLogic {
                 .toList();
     }
 
-    public List<EtablissementRecord> retrieveAllEtab() {
-        List<Etablissement> names = etablissementRepo.findAll();
-        return names.stream().map(etablissementMapper::mapToEtablissement).toList();
+    public List<String> retrieveAllEtabNames() {
+        List<String> defaultNames = etablissementRepo.retrieveEtabNames();
+        return defaultNames.stream().distinct().toList();
     }
 }

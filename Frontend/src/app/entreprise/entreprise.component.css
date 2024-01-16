@@ -1,0 +1,47 @@
+.search-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 175vh;
+    margin: auto;
+    height: 10vh;
+}
+
+#label-neq {
+    color: white;
+}
+
+#input-neq {
+    margin-left: 3vh;
+    margin-right: 3vh;
+}
+
+.mat-expansion-panel {
+    background-color: rgb(225, 225, 237);
+}
+
+.mat-expansion-panel:hover {
+    background-color: rgb(226, 172, 151);
+}
+
+.panel-general {
+    margin: 2vh;
+}
+
+.entreprise-panel-attribute {
+    color: blueviolet;
+}
+
+@media (max-width: 1080px) {
+    .search-field {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 2vh;
+    }
+
+    #input-neq {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
+}

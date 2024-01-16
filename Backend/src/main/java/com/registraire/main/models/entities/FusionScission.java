@@ -59,7 +59,7 @@ public class FusionScission {
     @Column(name = "LIGN4_ADR")
     private String lign4Adr;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "NEQ", referencedColumnName = "NEQ", insertable = false, updatable = false)
     private Entreprise entreprise;
 }

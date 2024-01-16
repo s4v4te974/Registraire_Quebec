@@ -47,7 +47,7 @@ public class ContinuationTransformation {
     @Column(name = "DAT_EFCTVT")
     private LocalDate datEfctvt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "NEQ", referencedColumnName = "NEQ", insertable = false, updatable = false)
     private Entreprise entreprise;
 }

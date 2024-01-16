@@ -1,0 +1,31 @@
+<div class="filter-code">
+    <div class="search">
+        <label class="label-search">please choose a activity sector (case sensitive) </label>
+        <form action="">
+            <mat-form-field id="input-field">
+                <mat-label>Secteur</mat-label>
+                <input type="text" placeholder="choose one" matInput [formControl]="searchControlValeur"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    @for(valeur of codesFilteredOptions | async; track valeur){
+                    <mat-option [value]="valeur">{{valeur}}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+        <label class="label-search">please choose a activity sector (case sensitive) </label>
+        <form action="">
+            <mat-form-field id="input-field">
+                <mat-label>Secteur</mat-label>
+                <input type="text" placeholder="choose one" matInput [formControl]="searchControlName"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    @for(name of codesFilteredOptions | async; track name){
+                    <mat-option [value]="name">{{name}}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="onSubmit()"> Search</button>
+</div>
