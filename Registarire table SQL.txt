@@ -1,0 +1,112 @@
+CREATE TABLE Entreprise (
+    neq VARCHAR(20) PRIMARY KEY,
+    ind_fail CHAR(1),
+    dat_immat DATE,
+    cod_regim_juri VARCHAR(500),
+    cod_intval_emplo_que VARCHAR(500),
+    dat_cess_prevu DATE,
+    cod_stat_immat VARCHAR(500),
+    cod_forme_juri VARCHAR(500),
+    dat_stat_immat DATE,
+    cod_regim_juri_consti VARCHAR(500),
+    dat_depo_declr DATE,
+    an_decl INTEGER,
+    an_prod INTEGER,
+    dat_limit_prod DATE,
+    an_prod_pre INTEGER,
+    dat_limit_prod_pre DATE,
+    dat_maj_index_nom DATE,
+    cod_act_econ_cae VARCHAR(500),
+    no_act_econ_assuj INTEGER,
+    desc_act_econ_assuj VARCHAR(500),
+    cod_act_econ_cae2 VARCHAR(500),
+    no_act_econ_assuj2 INTEGER,
+    desc_act_econ_assuj2 VARCHAR(500),
+    nom_loclt_consti VARCHAR(500),
+    dat_consti DATE,
+    ind_conven_unmn_actnr CHAR(1),
+    ind_ret_tout_pouvr CHAR(1),
+    ind_limit_resp CHAR(1),
+    dat_deb_resp DATE,
+    dat_fin_resp DATE,
+    objet_soc VARCHAR(1000),
+    no_mtr_volont VARCHAR(500),
+    adr_domcl_adr_disp CHAR(1),
+    adr_domcl_lign1_adr VARCHAR(500),
+    adr_domcl_lign2_adr VARCHAR(500),
+    adr_domcl_lign3_adr VARCHAR(500),
+    adr_domcl_lign4_adr VARCHAR(500)
+);
+
+CREATE TABLE FusionScission (
+	id UUID PRIMARY KEY,
+    neq VARCHAR(20),
+    neq_assuj_rel VARCHAR(250),
+    denomn_soc VARCHAR(500),
+    cod_rela_assuj VARCHAR(500),
+    dat_efctvt DATE,
+    ind_disp CHAR(1),
+    lign1_adr VARCHAR(500),
+    lign2_adr VARCHAR(500),
+	lign3_adr VARCHAR(500),
+    lign4_adr VARCHAR(500)
+);
+
+CREATE TABLE ContinuationTransformation (
+	id UUID PRIMARY KEY,
+    neq VARCHAR(20),
+    cod_typ_chang VARCHAR(500),
+    cod_regim_juri VARCHAR(500),
+    autr_regim_juri VARCHAR(500),
+    nom_loclt VARCHAR(500),
+    dat_efctvt DATE
+);
+
+CREATE TABLE DomaineValeur (
+    cod_dom_val VARCHAR(20) PRIMARY KEY,
+    val_dom_fran VARCHAR(250),
+);
+
+CREATE TABLE Nom (
+	id UUID PRIMARY KEY,
+    neq VARCHAR(20),
+    nom_assuj VARCHAR(500),
+    nom_assuj_lang_etrng VARCHAR(500),
+    stat_nom VARCHAR(500),
+    typ_nom_assuj VARCHAR(500),
+    dat_init_nom_assuj DATE,
+    dat_fin_nom_assuj DATE
+);
+
+CREATE TABLE Etablissement (
+	id UUID PRIMARY KEY,
+    neq VARCHAR(20),
+    no_suf_etab INTEGER,
+    ind_etab_princ CHAR(1),
+    ind_salon_bronz CHAR(1),
+    ind_vente_tabac_detl CHAR(1),
+    ind_disp CHAR(1),
+    lign1_adr VARCHAR(500),
+    lign2_adr VARCHAR(500),
+    lign3_adr VARCHAR(500),
+    lign4_adr VARCHAR(500),
+    cod_act_econ VARCHAR(500),
+    desc_act_econ_etab VARCHAR(500),
+    no_act_econ_etab INTEGER,
+    cod_act_econ2 VARCHAR(500),
+    desc_act_econ_etab2 VARCHAR(500),
+	no_act_econ_etab2 NUMBER (2)
+	nom_etab VARCHAR2 (500)
+);
+
+ALTER TABLE FusionScission
+ADD FOREIGN KEY (neq) REFERENCES Entreprise(neq);
+
+ALTER TABLE ContinuationTransformation
+ADD FOREIGN KEY (neq) REFERENCES Entreprise(neq);
+
+ALTER TABLE Nom
+ADD FOREIGN KEY (neq) REFERENCES Entreprise(neq);
+
+ALTER TABLE Etablissement
+ADD FOREIGN KEY (neq) REFERENCES Entreprise(neq);
