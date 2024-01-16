@@ -1,14 +1,21 @@
+drop table IF EXISTS entreprise CASCADE;
+drop table IF EXISTS fusionscission CASCADE;
+drop table IF EXISTS domainevaleur CASCADE;
+drop table IF EXISTS etablissement CASCADE;
+drop table IF EXISTS continuationtransformation CASCADE;
+drop table IF EXISTS nom CASCADE;
+
 CREATE TABLE Entreprise (
     neq VARCHAR(20) PRIMARY KEY,
     ind_fail CHAR(1),
     dat_immat DATE,
-    cod_regim_juri VARCHAR(500),
+    cod_regim_juri INTEGER,
     cod_intval_emplo_que VARCHAR(500),
     dat_cess_prevu DATE,
     cod_stat_immat VARCHAR(500),
     cod_forme_juri VARCHAR(500),
     dat_stat_immat DATE,
-    cod_regim_juri_consti VARCHAR(500),
+    cod_regim_juri_consti INTEGER,
     dat_depo_declr DATE,
     an_decl INTEGER,
     an_prod INTEGER,
@@ -16,10 +23,10 @@ CREATE TABLE Entreprise (
     an_prod_pre INTEGER,
     dat_limit_prod_pre DATE,
     dat_maj_index_nom DATE,
-    cod_act_econ_cae VARCHAR(500),
+    cod_act_econ_cae INTEGER,
     no_act_econ_assuj INTEGER,
     desc_act_econ_assuj VARCHAR(500),
-    cod_act_econ_cae2 VARCHAR(500),
+    cod_act_econ_cae2 INTEGER,
     no_act_econ_assuj2 INTEGER,
     desc_act_econ_assuj2 VARCHAR(500),
     nom_loclt_consti VARCHAR(500),
@@ -56,15 +63,15 @@ CREATE TABLE ContinuationTransformation (
 	id UUID PRIMARY KEY,
     neq VARCHAR(20),
     cod_typ_chang VARCHAR(500),
-    cod_regim_juri VARCHAR(500),
+    cod_regim_juri INTEGER,
     autr_regim_juri VARCHAR(500),
     nom_loclt VARCHAR(500),
     dat_efctvt DATE
 );
 
 CREATE TABLE DomaineValeur (
-    cod_dom_val VARCHAR(20) PRIMARY KEY,
-    val_dom_fran VARCHAR(250),
+    cod_dom_val INTEGER PRIMARY KEY,
+    val_dom_fran VARCHAR(250)
 );
 
 CREATE TABLE Nom (
@@ -90,13 +97,13 @@ CREATE TABLE Etablissement (
     lign2_adr VARCHAR(500),
     lign3_adr VARCHAR(500),
     lign4_adr VARCHAR(500),
-    cod_act_econ VARCHAR(500),
+    cod_act_econ INTEGER,
     desc_act_econ_etab VARCHAR(500),
     no_act_econ_etab INTEGER,
-    cod_act_econ2 VARCHAR(500),
+    cod_act_econ2 INTEGER,
     desc_act_econ_etab2 VARCHAR(500),
-	no_act_econ_etab2 NUMBER (2)
-	nom_etab VARCHAR2 (500)
+	no_act_econ_etab2 INTEGER,
+	nom_etab VARCHAR(500)
 );
 
 ALTER TABLE FusionScission
