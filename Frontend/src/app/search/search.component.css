@@ -1,11 +1,11 @@
 .filter-code {
     display: flex;
     flex-direction: column;
-    justify-content: left;
+    justify-content: flex-start; 
     align-items: left;
-    width: 100vh;
+    width: 100%;
     margin: auto;
-    height: 10vh;
+    height: auto; 
     margin-top: 5vh;
 }
 
@@ -13,18 +13,50 @@
     color: white;
     padding-right: 5vh;
     padding-left: 1vh;
-}
-
-#casse {
-    color: white;
-    margin-left: 5vh;
+    margin-left: 5%; 
 }
 
 #input-field {
-    width: 300%;
+    width: 100%; 
 }
 
-.search{
-    margin-left: -40vh;
-    margin-right: 100vh;
+.search {
+    margin-left: 10vh; 
+    margin-right: 90vh;
+}
+
+.entreprise-panel-attribute {
+    color: blueviolet;
+    margin: 2vh;
+    margin-top: 5vh;
+}
+
+.panel-general {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    width: 100%;
+    margin: auto;
+    height: auto; 
+    margin-left: 5vh;
+    margin-top: 5vh;
+}
+
+#search-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20vh;
+    margin: auto;
+    height: 7vh;
+    margin-top: 5vh;
+}
+
+@media (max-width: 1200px) {
+    .search {
+        margin-left: 5vh; 
+        margin-right: 5vh; 
+    }
 }

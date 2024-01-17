@@ -117,3 +117,18 @@ ADD FOREIGN KEY (neq) REFERENCES Entreprise(neq);
 
 ALTER TABLE Etablissement
 ADD FOREIGN KEY (neq) REFERENCES Entreprise(neq);
+
+CREATE VIEW code_etab AS 
+SELECT DISTINCT d.cod_dom_val, d.val_dom_fran 
+FROM domainevaleur d 
+INNER JOIN Etablissement e 
+ON e.cod_act_econ = d.cod_dom_val OR e.cod_act_econ2 = d.cod_dom_val;
+	
+CREATE VIEW etab_short AS
+SELECT
+    e.nom_etab AS name,
+    STRING_AGG(e.cod_act_econ || ',' || e.cod_act_econ2, ',') AS combined_values
+FROM
+    Etablissement e
+GROUP BY
+    e.nom_etab;

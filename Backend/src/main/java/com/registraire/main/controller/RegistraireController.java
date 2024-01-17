@@ -1,8 +1,9 @@
 package com.registraire.main.controller;
 
 import com.registraire.main.businesslogic.RegistraireBusinessLogic;
-import com.registraire.main.models.dto.DomaineValeurRecord;
+import com.registraire.main.models.dto.CodeEtabRecord;
 import com.registraire.main.models.dto.EntrepriseRecord;
+import com.registraire.main.models.dto.EtabShortRecord;
 import com.registraire.main.models.dto.EtablissementRecord;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +38,8 @@ public class RegistraireController {
     }
 
     @GetMapping(value = "code-valeurs/")
-    public ResponseEntity<List<DomaineValeurRecord>> retrieveCodeValues() {
-        List<DomaineValeurRecord> domaineValeurRecords = businessLogic.retrieveDomaineValeur();
+    public ResponseEntity<List<CodeEtabRecord>> retrieveCodeValues() {
+        List<CodeEtabRecord> domaineValeurRecords = businessLogic.retrieveCodeEtabs();
         if (domaineValeurRecords.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -47,8 +48,8 @@ public class RegistraireController {
     }
 
     @GetMapping(value = "etabs-names/")
-    public ResponseEntity<List<String>> retrieveNames() {
-        List<String> etabs = businessLogic.retrieveAllEtabNames();
+    public ResponseEntity<List<EtabShortRecord>> retrieveNames() {
+        List<EtabShortRecord> etabs = businessLogic.retrieveShortsEtab();
         if (etabs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -68,4 +69,5 @@ public class RegistraireController {
             return new ResponseEntity<>(etabs, HttpStatus.OK);
         }
     }
+
 }

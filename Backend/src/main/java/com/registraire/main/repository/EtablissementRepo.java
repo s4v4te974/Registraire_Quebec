@@ -9,16 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.registraire.main.repository.utils.QueryUtils.ETAB_NAMES_QUERY;
 import static com.registraire.main.repository.utils.QueryUtils.FIND_BY_NAME_AND_CODE_QUERY;
 
 @Repository
 public interface EtablissementRepo extends JpaRepository<Etablissement, String> {
-
-
-
-    @Query(ETAB_NAMES_QUERY)
-    List<String> retrieveEtabNames();
 
     List<Etablissement> findByNomEtab(@NotNull String nom);
 
