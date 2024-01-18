@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine, text
+
 from mapper import registraire_mappers
 
 engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost:5432/registraire')
@@ -55,3 +56,8 @@ def delete_all_table():
         count = connection.execute(text(f"SELECT COUNT(*) FROM {entreprise};"))
         print(count.scalar())
         connection.commit()
+
+
+def close_connection_final(connection):
+    connection.close()
+    engine.dispose()

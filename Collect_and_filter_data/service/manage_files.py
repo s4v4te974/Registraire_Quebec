@@ -1,7 +1,9 @@
-import cloudscraper
-from utils import const as ct
-import zipfile
 import os.path
+import zipfile
+
+import cloudscraper
+
+from utils import const as ct
 
 
 def download_and_unzip_file():

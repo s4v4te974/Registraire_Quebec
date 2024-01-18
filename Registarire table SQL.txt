@@ -103,7 +103,9 @@ CREATE TABLE Etablissement (
     cod_act_econ2 INTEGER,
     desc_act_econ_etab2 VARCHAR(500),
 	no_act_econ_etab2 INTEGER,
-	nom_etab VARCHAR(500)
+	nom_etab VARCHAR(500),
+	x_coordonate numeric(4,7),
+	y_coordonate numeric(4,7)
 );
 
 ALTER TABLE FusionScission
@@ -132,3 +134,13 @@ FROM
     Etablissement e
 GROUP BY
     e.nom_etab;
+	
+create view etab_coordonates as
+select e.nom_etab as name,
+	   e.lign1_adr as adresse,
+	   e.lign2_adr as localite,
+	   e.lign3_adr as localite2,
+	   e.lign4_adr as zipcode,
+	   e.x_coordonate as x_coordonate,
+	   e.y_coordonate as y_coordonate
+from etablissement e 

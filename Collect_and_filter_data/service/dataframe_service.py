@@ -1,7 +1,15 @@
 import uuid
-
 import pandas as pd
 import utils.const as ct
+import requests as requests
+from requests.adapters import HTTPAdapter
+from urllib3 import Retry
+
+from models.Etablissement import Etablissement, Candidates
+
+url: str = (
+    'https://servicescarto.mern.gouv.qc.ca/pes/rest/services/Territoire/AdressesQuebec_Geocodage/GeocodeServer'
+    '/findAddressCandidates?f=json&outSR=4326&singleLine=')
 
 
 def filter_entreprise_file():
@@ -58,3 +66,48 @@ def rename_dfs(list_df):
 def generate_uuid(list_df):
     for df in list_df:
         df.insert(0, 'ID', [uuid.uuid4() for _ in range(len(df))])
+
+
+def retrieve_data(address: str, localite: str):
+    url_to_call = url + address.replace(' ', '+')
+
+    retry_strategy = Retry(
+        total=3,
+    )
+    session = requests.session()
+    session.mount("https://", HTTPAdapter(max_retries=retry_strategy))
+    response = session.get(url_to_call)
+
+    if response.status_code == 200:
+        return map_response(response, localite)
+    else:
+        print("unable to call ")
+
+
+def map_response(response, localite: str):
+    data = response.json()
+    etablissement = Etablissement()
+    etablissement.spatialReference.wkid = data['spatialReference']['wkid']
+    etablissement.spatialReference.latestWkid = data['spatialReference']['latestWkid']
+
+    for candidate_data in data['candidates']:
+        candidate = Candidates()
+        candidate.address = candidate_data['address']
+        candidate.location.x = candidate_data['location']['x']
+        candidate.location.y = candidate_data['location']['y']
+        candidate.score = candidate_data['score']
+        etablissement.candidates.append(candidate)
+
+    print(etablissement.candidates[0].address)
+    print(etablissement.candidates[0].location.x)
+    print(etablissement.candidates[0].location.y)
+
+    etablissement.candidates = [obj for obj in etablissement.candidates if obj.address.endswith(localite)]
+
+    return etablissement
+
+
+def map_coordonates(df):
+    df = df['lign1_adr']
+
+retrieve_data('1028, RUE ST-JEAN', 'G1R 1R6')
