@@ -1,11 +1,15 @@
 import uuid
+
 import pandas as pd
-import utils.const as ct
+import numpy as np
 import requests as requests
+from requests import Session, Response
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
-from models.Etablissement import Etablissement, Candidates
+import utils.const as ct
+
+from models.Coordinate import EtabsGeo, AddressLocalite
 
 url: str = (
     'https://servicescarto.mern.gouv.qc.ca/pes/rest/services/Territoire/AdressesQuebec_Geocodage/GeocodeServer'
@@ -69,45 +73,75 @@ def generate_uuid(list_df):
 
 
 def retrieve_data(address: str, localite: str):
-    url_to_call = url + address.replace(' ', '+')
+    print(address)
+    url_to_call: str = url + address.replace(' ', '+')
 
-    retry_strategy = Retry(
+    retry_strategy: Retry = Retry(
         total=3,
     )
-    session = requests.session()
+    session: Session = requests.session()
     session.mount("https://", HTTPAdapter(max_retries=retry_strategy))
-    response = session.get(url_to_call)
+    response: Response = session.get(url_to_call)
 
     if response.status_code == 200:
-        return map_response(response, localite)
+        return map_response(response, localite, address)
     else:
         print("unable to call ")
 
 
-def map_response(response, localite: str):
+def map_response(response, df_localite: str, address: str):
     data = response.json()
-    etablissement = Etablissement()
-    etablissement.spatialReference.wkid = data['spatialReference']['wkid']
-    etablissement.spatialReference.latestWkid = data['spatialReference']['latestWkid']
+    etablissements: list[EtabsGeo] = []
+    localite: str = df_localite[:3] + ' ' + df_localite[-3:]
 
     for candidate_data in data['candidates']:
-        candidate = Candidates()
-        candidate.address = candidate_data['address']
-        candidate.location.x = candidate_data['location']['x']
-        candidate.location.y = candidate_data['location']['y']
-        candidate.score = candidate_data['score']
-        etablissement.candidates.append(candidate)
+        etablissement = EtabsGeo()
+        etablissement.address = candidate_data['address']
+        etablissement.x = candidate_data['location']['x']
+        etablissement.y = candidate_data['location']['y']
+        etablissements.append(etablissement)
 
-    print(etablissement.candidates[0].address)
-    print(etablissement.candidates[0].location.x)
-    print(etablissement.candidates[0].location.y)
+    etablissements = [obj for obj in etablissements if obj.address.endswith(localite)]
 
-    etablissement.candidates = [obj for obj in etablissement.candidates if obj.address.endswith(localite)]
-
-    return etablissement
+    if etablissements:
+        etablissements[0].address = address + ';' + df_localite
+        return etablissements[0]
 
 
-def map_coordonates(df):
-    df = df['lign1_adr']
+def populate_coordonates(df):
+    df['x_coordinate'] = np.nan
+    df['y_coordinate'] = np.nan
+    etablissements = []
 
-retrieve_data('1028, RUE ST-JEAN', 'G1R 1R6')
+    print(df.shape[0])
+
+    # for test
+
+    df = df.head(500)
+
+    df_filtered_unique = df.drop_duplicates(subset=['lign1_adr', 'lign4_adr'])
+    df_filtered_no_valid_address = df_filtered_unique.dropna(subset=['lign1_adr', 'lign4_adr'])
+    addresses: list[AddressLocalite] = (df_filtered_no_valid_address[['lign1_adr', 'lign4_adr']]
+                                        .apply(lambda row: AddressLocalite(row['lign1_adr'], row['lign4_adr']),
+                                               axis=1).tolist())
+
+    print(len(addresses))
+    print('calling WS')
+    for address in addresses:
+        etab_geo: EtabsGeo = retrieve_data(address.address, address.localite)
+        if etab_geo:
+            etablissements.append(etab_geo)
+
+    print('map df attributes')
+    for etab in etablissements:
+        address = etab.address[:etab.address.index(';')].strip()
+        localite = etab.address[etab.address.index(';')+1:].strip()
+
+        condition = ((df['lign1_adr'] == address) & (df['lign4_adr'] == localite))
+
+        print(f"Updating {sum(condition)} rows with x={etab.x} and y={etab.y}")
+
+        df.loc[condition, 'x_coordinate'] = etab.x
+        df.loc[condition, 'y_coordinate'] = etab.y
+
+    return df

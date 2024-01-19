@@ -1,8 +1,9 @@
-from sqlalchemy import create_engine, text
+from typing import Any
 
+from sqlalchemy import create_engine, text, Engine, CursorResult
 from mapper import registraire_mappers
 
-engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost:5432/registraire')
+engine: Engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost:5432/registraire')
 
 chunk_size = 10_000
 entreprise = 'entreprise'
@@ -45,7 +46,7 @@ def insert_domaine_valeur(dataframe):
 
 def delete_all_table():
     with engine.connect() as connection:
-        count = connection.execute(text(f"SELECT COUNT(*) FROM {entreprise};"))
+        count: CursorResult[Any] = connection.execute(text(f"SELECT COUNT(*) FROM {entreprise};"))
         print(count.scalar())
         connection.execute(text(f"TRUNCATE TABLE {entreprise} CASCADE;"))
         connection.execute(text(f"TRUNCATE TABLE {etablissement} CASCADE;"))

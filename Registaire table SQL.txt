@@ -104,8 +104,8 @@ CREATE TABLE Etablissement (
     desc_act_econ_etab2 VARCHAR(500),
 	no_act_econ_etab2 INTEGER,
 	nom_etab VARCHAR(500),
-	x_coordonate numeric(4,7),
-	y_coordonate numeric(4,7)
+	x_coordinate numeric(4,7),
+	y_coordinate numeric(4,7)
 );
 
 ALTER TABLE FusionScission
@@ -141,6 +141,7 @@ select e.nom_etab as name,
 	   e.lign2_adr as localite,
 	   e.lign3_adr as localite2,
 	   e.lign4_adr as zipcode,
-	   e.x_coordonate as x_coordonate,
-	   e.y_coordonate as y_coordonate
+	   e.x_coordinate as x_coordinate,
+	   e.y_coordinate as y_coordinate
 from etablissement e 
+where e.x_coordinate is not null 

@@ -1,9 +1,10 @@
 import pandas as pd
+from pandas import Timestamp
 
-default_value_str = "N/A"
-default_value_char = " "
-default_value_numeric = 0
-default_date = pd.to_datetime('1900-01-01')
+default_value_str: str = "N/A"
+default_value_char: str = " "
+default_value_numeric: int = 0
+default_date: Timestamp = pd.to_datetime('1900-01-01')
 
 
 def map_entreprise(df_entreprise):

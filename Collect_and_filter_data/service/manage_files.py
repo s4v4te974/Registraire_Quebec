@@ -1,7 +1,10 @@
 import os.path
 import zipfile
+from typing import List
 
 import cloudscraper
+from cloudscraper import CloudScraper
+from requests import Response
 
 from utils import const as ct
 
@@ -12,11 +15,11 @@ def download_and_unzip_file():
 
 
 def download_files():
-    scraper = cloudscraper.create_scraper()
-    response = scraper.get(ct.URL_REGISTRE, headers=ct.HEADERS)
+    scraper: CloudScraper = cloudscraper.create_scraper()
+    response: Response = scraper.get(ct.URL_REGISTRE, headers=ct.HEADERS)
     if response.status_code == 200:
         print(ct.CONNEXION_SUCCESS, response.status_code)
-        content = response.content
+        content: bytes = response.content
         with open(ct.DOWNLOAD_FILE_PATH, 'wb') as file:
             file.write(content)
     else:
@@ -30,7 +33,7 @@ def unzip_files():
 
 
 def remove_file():
-    files = os.listdir(ct.DOWNLOAD_PATH)
+    files: list[str] = os.listdir(ct.DOWNLOAD_PATH)
     for file_name in files:
         file_path = os.path.join(ct.DOWNLOAD_PATH, file_name)
         if os.path.isfile(file_path):
