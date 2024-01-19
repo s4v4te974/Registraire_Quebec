@@ -113,11 +113,8 @@ def populate_coordonates(df):
     df['y_coordinate'] = np.nan
     etablissements = []
 
-    print(df.shape[0])
-
     # for test
-
-    df = df.head(500)
+    df = df.head(3000)
 
     df_filtered_unique = df.drop_duplicates(subset=['lign1_adr', 'lign4_adr'])
     df_filtered_no_valid_address = df_filtered_unique.dropna(subset=['lign1_adr', 'lign4_adr'])
@@ -125,8 +122,6 @@ def populate_coordonates(df):
                                         .apply(lambda row: AddressLocalite(row['lign1_adr'], row['lign4_adr']),
                                                axis=1).tolist())
 
-    print(len(addresses))
-    print('calling WS')
     for address in addresses:
         etab_geo: EtabsGeo = retrieve_data(address.address, address.localite)
         if etab_geo:

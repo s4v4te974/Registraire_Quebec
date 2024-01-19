@@ -9,8 +9,8 @@ from repository import manage_data as dao
 
 def main():
     try:
-        # manage_files.remove_file()
-        # anage_files.download_and_unzip_file()
+        manage_files.remove_file()
+        manage_files.download_and_unzip_file()
         df_entreprise = df_service.filter_entreprise_file()
         df_etablissements = df_service.filter_other_file_by_neq(ct.ETABLISSEMENT_BASE, df_entreprise)
         df_conti_transfo = df_service.filter_other_file_by_neq(ct.TRANSFO_BASE, df_entreprise)
@@ -47,7 +47,7 @@ def main():
         print("error occurred during the process")
         print(be)
     finally:
-        # manage_files.remove_file()
+        manage_files.remove_file()
         print("Main finish")
 
 
