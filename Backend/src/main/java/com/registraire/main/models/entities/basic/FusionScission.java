@@ -1,4 +1,4 @@
-package com.registraire.main.models.entities;
+package com.registraire.main.models.entities.basic;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,15 +12,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "etablissement")
-public class Etablissement {
+@Table(name = "fusionscission")
+public class FusionScission {
 
     @Id
     @GeneratedValue
@@ -30,17 +31,17 @@ public class Etablissement {
     @Column(name = "NEQ")
     private String neq;
 
-    @Column(name = "NO_SUF_ETAB")
-    private int noSufEtab;
+    @Column(name = "NEQ_ASSUJ_REL")
+    private String neqAssujRel;
 
-    @Column(name = "IND_ETAB_PRINC")
-    private char indEtabPrinc;
+    @Column(name = "DENOMN_SOC")
+    private String denomnSoc;
 
-    @Column(name = "IND_SALON_BRONZ")
-    private char indSalonBronz;
+    @Column(name = "COD_RELA_ASSUJ")
+    private String codRelaAssuj;
 
-    @Column(name = "IND_VENTE_TABAC_DETL")
-    private char indVenteTabacDetl;
+    @Column(name = "DAT_EFCTVT")
+    private LocalDate datEfctvt;
 
     @Column(name = "IND_DISP")
     private char indDisp;
@@ -56,27 +57,6 @@ public class Etablissement {
 
     @Column(name = "LIGN4_ADR")
     private String lign4Adr;
-
-    @Column(name = "COD_ACT_ECON")
-    private int codActEcon;
-
-    @Column(name = "DESC_ACT_ECON_ETAB")
-    private String descActEconEtab;
-
-    @Column(name = "NO_ACT_ECON_ETAB")
-    private int noActEconEtab;
-
-    @Column(name = "COD_ACT_ECON2")
-    private int codActEcon2;
-
-    @Column(name = "DESC_ACT_ECON_ETAB2")
-    private String descActEconEtab2;
-
-    @Column(name = "NO_ACT_ECON_ETAB2")
-    private int noActEconEtab2;
-
-    @Column(name = "NOM_ETAB")
-    private String nomEtab;
 
     @ManyToOne
     @JoinColumn(name = "NEQ", referencedColumnName = "NEQ", insertable = false, updatable = false)

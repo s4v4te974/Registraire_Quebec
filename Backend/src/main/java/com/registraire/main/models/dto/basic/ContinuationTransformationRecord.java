@@ -1,4 +1,4 @@
-package com.registraire.main.models.dto;
+package com.registraire.main.models.dto.basic;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package com.registraire.main.models.dto;
+package com.registraire.main.models.dto.basic;
 
 public record EtablissementRecord(String id, String neq, int noSufEtab,
                                   char indEtabPrinc, char indSalonBronz,

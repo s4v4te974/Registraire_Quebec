@@ -1,6 +1,6 @@
 package com.registraire.main.repository;
 
-import com.registraire.main.models.entities.Etablissement;
+import com.registraire.main.models.entities.basic.Etablissement;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

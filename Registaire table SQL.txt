@@ -135,13 +135,17 @@ FROM
 GROUP BY
     e.nom_etab;
 	
-create view etab_coordonates as
+create view etab_coordinates as
 select e.nom_etab as name,
 	   e.lign1_adr as adresse,
 	   e.lign2_adr as localite,
 	   e.lign3_adr as localite2,
 	   e.lign4_adr as zipcode,
 	   e.x_coordinate as x_coordinate,
-	   e.y_coordinate as y_coordinate
+	   e.y_coordinate as y_coordinate,
+	   d.cod_dom_val as code,
+	   d.val_dom_fran as code_value
 from etablissement e 
+inner join domainevaleur d
+on e.cod_act_econ = d.cod_dom_val OR e.cod_act_econ2 = d.cod_dom_val
 where e.x_coordinate is not null 

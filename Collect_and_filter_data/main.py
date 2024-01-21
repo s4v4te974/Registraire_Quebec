@@ -41,7 +41,7 @@ def main():
         print("DB insertion success")
 
         dao.close_connection_final(conn)
-        print("Main finish with success")
+        print("Process finish with success")
 
     except BaseException as be:
         print("error occurred during the process")

@@ -1,10 +1,10 @@
 package com.registraire.main.mapper;
 
 import com.registraire.main.mapper.utils.EntrepriseMapperUtils;
-import com.registraire.main.models.dto.EntrepriseRecord;
-import com.registraire.main.models.dto.EtablissementRecord;
-import com.registraire.main.models.entities.Entreprise;
-import com.registraire.main.models.entities.Etablissement;
+import com.registraire.main.models.dto.basic.EntrepriseRecord;
+import com.registraire.main.models.dto.basic.EtablissementRecord;
+import com.registraire.main.models.entities.basic.Entreprise;
+import com.registraire.main.models.entities.basic.Etablissement;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

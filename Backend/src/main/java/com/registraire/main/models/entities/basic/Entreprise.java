@@ -1,4 +1,4 @@
-package com.registraire.main.models.entities;
+package com.registraire.main.models.entities.basic;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

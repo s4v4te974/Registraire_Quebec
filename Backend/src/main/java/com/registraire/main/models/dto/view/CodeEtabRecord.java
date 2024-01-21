@@ -1,4 +1,4 @@
-package com.registraire.main.models.dto;
+package com.registraire.main.models.dto.view;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

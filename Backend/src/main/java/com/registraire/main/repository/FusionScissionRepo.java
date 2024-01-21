@@ -1,6 +1,6 @@
 package com.registraire.main.repository;
 
-import com.registraire.main.models.entities.FusionScission;
+import com.registraire.main.models.entities.basic.FusionScission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

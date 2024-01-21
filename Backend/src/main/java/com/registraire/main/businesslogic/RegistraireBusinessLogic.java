@@ -4,28 +4,25 @@ import com.registraire.main.mapper.CodeEtabMapper;
 import com.registraire.main.mapper.EntrepriseMapper;
 import com.registraire.main.mapper.EtabShortMapper;
 import com.registraire.main.mapper.EtablissementMapper;
-import com.registraire.main.models.dto.CodeEtabRecord;
-import com.registraire.main.models.dto.EntrepriseRecord;
-import com.registraire.main.models.dto.EtabShortRecord;
-import com.registraire.main.models.dto.EtablissementRecord;
-import com.registraire.main.models.entities.Entreprise;
-import com.registraire.main.models.entities.EtabShort;
-import com.registraire.main.models.entities.Etablissement;
+import com.registraire.main.mapper.GeoCodeurMapper;
+import com.registraire.main.models.dto.basic.EntrepriseRecord;
+import com.registraire.main.models.dto.basic.EtablissementRecord;
+import com.registraire.main.models.dto.view.CodeEtabRecord;
+import com.registraire.main.models.dto.view.EtabShortRecord;
+import com.registraire.main.models.dto.view.GeoCodeurRecord;
+import com.registraire.main.models.entities.basic.Entreprise;
+import com.registraire.main.models.entities.basic.Etablissement;
+import com.registraire.main.models.entities.view.GeoCodeur;
 import com.registraire.main.repository.CodeEtabRepo;
 import com.registraire.main.repository.EntrepriseRepo;
 import com.registraire.main.repository.EtabShortRepo;
 import com.registraire.main.repository.EtablissementRepo;
+import com.registraire.main.repository.GeoCodeurRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -39,6 +36,10 @@ public class RegistraireBusinessLogic {
     private final CodeEtabRepo codeEtabRepo;
 
     private final EtabShortRepo etabShortRepo;
+
+    private final GeoCodeurRepo geoCodeurRepo;
+
+    private static final GeoCodeurMapper geoCodeurMapper = GeoCodeurMapper.INSTANCE;
 
     private static final CodeEtabMapper codeEtabMapper = CodeEtabMapper.INSTANCE;
 
@@ -78,8 +79,9 @@ public class RegistraireBusinessLogic {
         }
     }
 
-    public List<EtablissementRecord> retrieveEtabs() {
-        List<Etablissement> etabs = etablissementRepo.findAll();
-        return etabs.stream().map(etablissementMapper::mapToEtablissementRecord).toList();
+    public List<GeoCodeurRecord> retrieveGeoCoded() {
+        List<GeoCodeur> geos = geoCodeurRepo.findAll();
+        return geos.stream().map(geoCodeurMapper::mapToGeoCodeurRecord).toList();
     }
+
 }

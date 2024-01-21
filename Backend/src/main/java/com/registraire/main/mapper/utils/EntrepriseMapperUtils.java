@@ -1,7 +1,7 @@
 package com.registraire.main.mapper.utils;
 
-import com.registraire.main.models.dto.EntrepriseRecord;
-import com.registraire.main.models.entities.Entreprise;
+import com.registraire.main.models.dto.basic.EntrepriseRecord;
+import com.registraire.main.models.entities.basic.Entreprise;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;

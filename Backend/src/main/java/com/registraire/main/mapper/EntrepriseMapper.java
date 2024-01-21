@@ -1,15 +1,15 @@
 package com.registraire.main.mapper;
 
-import com.registraire.main.models.dto.ContinuationTransformationRecord;
-import com.registraire.main.models.dto.EntrepriseRecord;
-import com.registraire.main.models.dto.EtablissementRecord;
-import com.registraire.main.models.dto.FusionScissionRecord;
-import com.registraire.main.models.dto.NomRecord;
-import com.registraire.main.models.entities.ContinuationTransformation;
-import com.registraire.main.models.entities.Entreprise;
-import com.registraire.main.models.entities.Etablissement;
-import com.registraire.main.models.entities.FusionScission;
-import com.registraire.main.models.entities.Nom;
+import com.registraire.main.models.dto.basic.ContinuationTransformationRecord;
+import com.registraire.main.models.dto.basic.EntrepriseRecord;
+import com.registraire.main.models.dto.basic.EtablissementRecord;
+import com.registraire.main.models.dto.basic.FusionScissionRecord;
+import com.registraire.main.models.dto.basic.NomRecord;
+import com.registraire.main.models.entities.basic.ContinuationTransformation;
+import com.registraire.main.models.entities.basic.Entreprise;
+import com.registraire.main.models.entities.basic.Etablissement;
+import com.registraire.main.models.entities.basic.FusionScission;
+import com.registraire.main.models.entities.basic.Nom;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

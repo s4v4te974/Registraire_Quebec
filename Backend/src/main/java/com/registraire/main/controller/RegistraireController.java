@@ -1,10 +1,11 @@
 package com.registraire.main.controller;
 
 import com.registraire.main.businesslogic.RegistraireBusinessLogic;
-import com.registraire.main.models.dto.CodeEtabRecord;
-import com.registraire.main.models.dto.EntrepriseRecord;
-import com.registraire.main.models.dto.EtabShortRecord;
-import com.registraire.main.models.dto.EtablissementRecord;
+import com.registraire.main.models.dto.basic.EntrepriseRecord;
+import com.registraire.main.models.dto.basic.EtablissementRecord;
+import com.registraire.main.models.dto.view.CodeEtabRecord;
+import com.registraire.main.models.dto.view.EtabShortRecord;
+import com.registraire.main.models.dto.view.GeoCodeurRecord;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -70,4 +71,14 @@ public class RegistraireController {
         }
     }
 
+
+    @GetMapping(value = "get-locations/")
+    public ResponseEntity<List<GeoCodeurRecord>> retrieveLocationsByEtab() {
+        List<GeoCodeurRecord> locations = businessLogic.retrieveGeoCoded();
+        if (locations.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(locations, HttpStatus.OK);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.registraire.main.models.entities;
+package com.registraire.main.models.entities.view;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,13 +14,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "domainevaleur")
-public class DomaineValeur {
-    @Id
-    @Column(name = "COD_DOM_VAL")
-    private Integer codDomVal;
+@Table(name = "etab_short")
+public class EtabShort {
 
-    @Column(name = "VAL_DOM_FRAN")
-    private String valDomFran;
+    @Id
+    @Column(name = "NOM_ETAB")
+    private String nomEtab;
+
+    @Column(name = "COMBINED_VALUES")
+    private String combinedValues;
 
 }
