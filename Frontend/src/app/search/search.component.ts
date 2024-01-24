@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchService } from '../service/search.service';
 import { Secteur } from '../models/secteur';
-import { Observable, Subject, catchError, map, merge, of, startWith } from 'rxjs';
+import { Observable, catchError, map, merge, of, startWith } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -36,7 +36,6 @@ export class SearchComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  private nameFilterTrigger = new Subject<void>();
   searchControlValeur = new FormControl('');
   searchControlName = new FormControl('');
   etablissements: Etablissement[] = [];
@@ -78,17 +77,6 @@ export class SearchComponent implements OnInit {
         this.setFilterOptionsValue();
       });
   }
-
-  // private setFilterOptionsValue() {
-  //   this.codesFilteredOptions = merge(
-  //     this.searchControlName.valueChanges,
-  //     this.nameFilterTrigger.asObservable()
-  //   ).pipe(
-  //     startWith(''),
-  //     map(value => this._filterCode(value || '')),
-  //   );
-  // }
-
   private setFilterOptionsValue() {
     this.codesFilteredOptions = this.searchControlValeur.valueChanges.pipe(
       startWith(''),
@@ -117,7 +105,6 @@ export class SearchComponent implements OnInit {
   }
 
   //#endregion code
-
 
   //#region names
   getNomData() {
@@ -206,53 +193,4 @@ export class SearchComponent implements OnInit {
   openSnackBar(message: string) {
     this._snackBar.open(message, 'close');
   }
-
-  //#region dynamic change etab
-  // public dynamicChangeValueName(value: any): string[] {
-
-  //   const codeValue = value != null ? this.retrieveCodeFromValue(value) ?? -1 : 1;
-
-  //   const etabsCodes: EtabShort[] = this.shortEtabs.filter(etab => {
-  //     const numericValues: number[] = (etab.combinedValues?.split(',') || [])
-  //       .map(value => parseInt(value, 10)).filter(value => !isNaN(value));
-  //     return numericValues.includes(codeValue);
-  //   });
-
-  //   console.info('length', etabsCodes.length);
-
-  //   const filteredValues: string[] = etabsCodes.filter(etab => etab?.nomEtab !== undefined).map(etab => etab!.nomEtab!);
-
-  //   this.valuesNamesArray = filteredValues;
-  //   this.nameFilterTrigger.next();
-
-  //   return this.valuesNamesArray.slice(0, 20);
-  // }
-  //#endregion
-
-  //#region dynamic change etab
-  // public dynamicChangeValueCode(value: any): string[] {
-  //   const codeValue = value != null ? this.retrieveCodeFromValue(value) ?? -1 : 1;
-
-  //   const etabsCodes: EtabShort[] = this.shortEtabs.filter(etab => {
-  //     const numericValues: number[] = (etab.combinedValues?.split(',') || [])
-  //       .map(value => parseInt(value, 10)).filter(value => !isNaN(value));
-  //     return numericValues.includes(codeValue);
-  //   });
-
-  //   if(etabsCodes.length !== 0){
-  //     const filteredValues: string[] = etabsCodes.filter(etab => etab?.nomEtab !== undefined).map(etab => etab!.nomEtab!);
-
-  //     this.valuesNamesArray = filteredValues;
-  //     this.nameFilterTrigger.next();
-
-  //     console.log('in if', this.valuesNamesArray[0]);
-
-  //     return this.valuesNamesArray.slice(0, 20);
-  //   }
-  //   this.nameFilterTrigger.next();
-  //   console.log('out if', this.valuesNamesArray[0]);
-  //   this.valuesNamesArray = this.valuesNamesArrayDefault.filter(option => option.toLowerCase().includes('')).slice(0, 20);
-  //   return this.valuesNamesArray;
-  // }
-  //#endregion
 }

@@ -1,9 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapsService {
 
-  constructor() { }
+  url: string = 'http://localhost:8080/get-locations/';
+
+  constructor(private httpClient: HttpClient) { }
+
+  retrieveAllLocations():Observable<any>{
+    return this.httpClient.get(this.url);
+  }
 }

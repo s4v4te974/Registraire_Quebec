@@ -116,4 +116,18 @@ export class InterfaceMapperService {
       Entreprise: contiTransfo?.entreprise
     }
   }
+
+  mapToEtabMap(etab?: any) {
+    return {
+      nomEtab: etab.nomEtab,
+      adresse: etab.adresse,
+      localite: etab.localite,
+      localite2: etab.localite2,
+      zipcode: etab.zipcode,
+      xCoordinate: etab.xCoordinate,
+      yCoordinate: etab.yCoordinate,
+      code: etab.code,
+      codeValue: etab.codeValue
+    }
+  }
 }

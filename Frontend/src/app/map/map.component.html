@@ -1,1 +1,64 @@
-<p id="test">map works!</p>
+<div class="label-search">
+    <label>Select Current Location </label>
+</div>
+<div class="search-field col-sm-4 col-md-8 col-lg-12">
+    <div class="input-field">
+        <form action="">
+            <mat-form-field id="input-field" class="col-sm-4 col-md-8 col-lg-12">
+                <mat-label>Current Locations</mat-label>
+                <input type="text" placeholder="choose one" matInput [formControl]="searchAvailableLocations"
+                    [matAutocomplete]="locationAuto" class="col-sm-4 col-md-8 col-lg-12" #currentLocation>
+                <mat-autocomplete autoActiveFirstOption #locationAuto="matAutocomplete">
+                    @for(location of availableLocationsFilteredOptions | async; track location){
+                    <mat-option [value]="location">{{ location }}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
+<div class="label-search">
+    <label>please choose a activity sector (case sensitive) </label>
+</div>
+<div class="search-field col-sm-4 col-md-8 col-lg-12">
+    <div class="input-field">
+        <form action="">
+            <mat-form-field id="input-field" class="col-sm-4 col-md-8 col-lg-12">
+                <mat-label>Secteur</mat-label>
+                <input type="text" placeholder="choose one" matInput [formControl]="searchValuesControl"
+                    [matAutocomplete]="codeAuto" class="col-sm-4 col-md-8 col-lg-12">
+                <mat-autocomplete autoActiveFirstOption #codeAuto="matAutocomplete">
+                    @for(valeur of codesFilteredOptions | async; track valeur){
+                    <mat-option [value]="valeur">{{ valeur }}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="button-search">
+        <button type="button" class="btn btn-primary" (click)="onSubmit()"> Search</button>
+    </div>
+</div>
+<!--
+<div class="label-search">
+    <label> Please choose the shop name (case sensitive) </label>
+</div>
+<div class="search-field col-sm-4 col-md-8 col-lg-12">
+    <div class="input-field">
+        <form action="">
+            <mat-form-field id="input-field" class="col-sm-4 col-md-8 col-lg-12">
+                <mat-label>Shop</mat-label>
+                <input type="text" placeholder="choose one" matInput [formControl]="searchEtabsControl"
+                    [matAutocomplete]="etabAuto" class="col-sm-4 col-md-8 col-lg-12">
+                <mat-autocomplete autoActiveFirstOption #etabAuto="matAutocomplete">
+                    @for(name of namesFilteredOptions | async; track name) {
+                    <mat-option [value]="name">{{ name }}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="button-search">
+        <button class="search-button" type="button" class="btn btn-primary" (click)="onSubmit()"> Search</button>
+    </div>
+</div>-->

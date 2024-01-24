@@ -1,0 +1,12 @@
+<h1 mat-dialog-title style="width: 600px;">Map Dialog</h1>
+    <div mat-dialog-content>
+      <div id="leafletMap"></div>
+    </div>
+    <div mat-dialog-actions>
+      <select id="distanceFilter" [(ngModel)]="selectedDistance" (change)="onDistanceChange()">
+        <option value="5">5 km</option>
+        <option value="10">10 km</option>
+        <option value="25">25 km</option>
+      </select>
+
+    </div>
